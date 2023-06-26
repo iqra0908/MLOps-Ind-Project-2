@@ -1,4 +1,5 @@
 import h2o
+from h2o.automl import H2OAutoML
 
 # Initialize H2O cluster
 h2o.init()
@@ -10,7 +11,6 @@ data = h2o.import_file('df_arabica_clean.csv')
 train, valid, test = data.split_frame(ratios=[0.7, 0.15], seed=123)
 
 # Define AutoML configuration
-from h2o.automl import H2OAutoML
 aml = H2OAutoML(max_runtime_secs=3600, max_models=10)
 
 # Train the models
@@ -23,6 +23,9 @@ print(leaderboard)
 # Use the best model for predictions
 best_model = aml.leader
 predictions = best_model.predict(test)
+
+# Save the best model
+best_model.save_mojo('model')
 
 # Shutdown H2O cluster
 h2o.shutdown()
