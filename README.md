@@ -12,6 +12,9 @@ Before running the code, ensure that you have the following:
 
 - Python installed (version 3.6 or higher)
 - H2O Python package installed (can be installed via `pip install h2o`)
+- Azure account with access to Azure ML service
+
+## H20 
 
 ### Steps
 
@@ -32,6 +35,29 @@ Before running the code, ensure that you have the following:
 8. Shutdown H2O: Once the analysis and predictions are complete, shut down the H2O cluster.
 
 Make sure to replace `'coffee_data.csv'` with the appropriate path to the downloaded dataset file on your local machine.
+## Azure ML AutoML
+
+### Steps
+
+1. Download the dataset: Download the Coffee Quality Data from the Kaggle dataset page and save the file (`coffee_data.csv`) to your local machine.
+
+2. Split the data: Split the imported dataset into training, validation, and testing sets.
+
+3. Configure AutoML settings: Set up the AutoML configuration for Azure ML, including the task type, primary metric, explainability, allowed and blocked models, training time, validation type, and maximum concurrent iterations.
+
+4. Train the models: Use Azure ML's AutoML functionality to train machine learning models. This process will automatically explore different models and hyperparameter combinations.
+
+5. Evaluate the models: Analyze the results and generated leaderboard to assess the performance of the trained models on the validation set. The primary metric used in this case is the Normalized Root Mean Squared Error (NRMSE).
+
+6. Make predictions: Select the best-performing model from the leaderboard. In this case, the best model found was the Voting Ensemble with a Normalized Root Mean Squared Error (NRMSE) of 0.04804. Apply the selected model to the test set to generate predictions.
+
+7. Deploy the model as an endpoint: Use Azure ML to deploy the trained model as an endpoint. This will allow you to make predictions on new data.
+
+8. Test the endpoint: Verify that the deployed endpoint is working correctly by sending sample data and receiving predictions.
+
+9. Cleanup: If needed, delete the deployed endpoint and any associated resources to avoid incurring unnecessary costs.
+
+
 
 ## Conclusion
 
